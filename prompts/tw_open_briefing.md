@@ -4,9 +4,10 @@
 
 【報價】
 用Bash執行帶標準瀏覽器User-Agent的HTTP請求讀取以下端點(加range=1d&interval=1d參數,只取當天單一快照):
-https://query1.finance.yahoo.com/v8/finance/chart/0052.TW?range=1d&interval=1d
+1. 加權指數(供HTML樣板INDEX_CARDS區塊使用):https://query1.finance.yahoo.com/v8/finance/chart/%5ETWII?range=1d&interval=1d
+2. 0052.TW(供持股報告區塊使用):https://query1.finance.yahoo.com/v8/finance/chart/0052.TW?range=1d&interval=1d
 注意:內建WebFetch工具會被Yahoo反爬蟲機制擋回403,需改用Bash/curl並帶瀏覽器UA(例如"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36")才能正常取得資料。若query1.finance.yahoo.com失敗,可改試query2.finance.yahoo.com同路徑。
-只讀取回傳JSON裡chart.result[0].meta物件的regularMarketPrice與chartPreviousClose(注意:欄位名稱是chartPreviousClose,不是previousClose,meta物件裡沒有後者),計算漲跌%。
+兩個端點皆只讀取回傳JSON裡chart.result[0].meta物件的regularMarketPrice與chartPreviousClose(注意:欄位名稱是chartPreviousClose,不是previousClose,meta物件裡沒有後者),計算漲跌%。
 
 【新聞來源設定】
 1. 中央社財經 RSS(優先):https://feeds.feedburner.com/rsscna/finance
