@@ -15,6 +15,7 @@
 3. Yahoo股市台股動態 RSS(補充):https://tw.stock.yahoo.com/rss?category=tw-market
 用Bash執行帶標準瀏覽器User-Agent的HTTP請求讀取以上三個端點,解析<item>列表(title、link、pubDate、description)。
 注意:內建WebFetch工具會被這三個端點擋回403,需改用Bash/curl並帶瀏覽器UA(例如"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36")才能正常取得資料。
+若curl回傳HTTP 200但內容為空(0 bytes)或無法解析出任何<item>,判定為暫時性讀取異常,自動以相同指令(建議加上--compressed參數)重試一次;重試後仍為空才視為該來源不可用,依現有規則捨棄該來源繼續執行。
 
 【時間窗口 — 鎖定「開盤前」】
 只保留pubDate落在「當日早上05:00」到「查詢當下」這段區間的新聞,窗口外的新聞一律捨棄。
