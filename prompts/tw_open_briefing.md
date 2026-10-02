@@ -21,7 +21,7 @@
 
 【新聞】
 用web_search補充,不超過5次查詢,聚焦:
-- 亞洲盤早盤動向(日經、韓股,尤其半導體同業)
+- 亞洲盤早盤動向(日經、韓股,尤其半導體同業):web_search常查不到當日資料,優先改用Bash/curl帶瀏覽器UA讀取Yahoo chart端點(與【報價】同網域、已證實可用),日經https://query1.finance.yahoo.com/v8/finance/chart/%5EN225?range=1d&interval=1d、韓國綜合https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?range=1d&interval=1d,同樣只讀meta的regularMarketPrice與chartPreviousClose計算漲跌%,納入「市場動態」;兩者皆失敗才以web_search補查,仍無資料則照常記錄於執行摘要。
 - 影響今日開盤情緒的總經事件(Fed、地緣政治、匯率)
 - 與科技股高度相關的消息
 同樣只採用時間窗口內發布的內容。
